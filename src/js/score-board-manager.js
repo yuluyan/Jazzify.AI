@@ -2,7 +2,7 @@ import abcjs from "abcjs"
 
 class CursorControl {
     constructor(scoreBoard, finishedCallback, downloadCallback) {
-        
+
         this.scoreBoard = scoreBoard
         this.beatSubdivisions = 4
         /*
@@ -60,7 +60,7 @@ class CursorControl {
 class ScoreBoardManager {
     constructor(scoreBoardId, scoreInputId, scoreOverlayId, callbacks) {
         let ua = window.navigator.userAgent;
-        console.log(ua)
+        //console.log(ua)
         let webkit = /WebKit/i.test(ua)
         let appleHandHoldDevice = /iPhone|iPad|iPod|Mobile|mobile|CriOS/i.test(ua)
         let chrome = /Chrome/i.test(ua)
@@ -163,7 +163,6 @@ class ScoreBoardManager {
             //console.log("onchange")
         }
         let thisSBM = this
-        console.log(this.isSafari)
         this.editor = new abcjs.Editor(
             this.scoreInputId,
             {
@@ -180,7 +179,7 @@ class ScoreBoardManager {
                 //onchange: editorOnchange,
                 abcjsParams: {
                     add_classes: true,
-                    paddingtop: 10,
+                    paddingtop: 25,
                     paddingbottom: 10,
                     paddingright: (thisSBM.specialMargin ? 0 : 20),
                     paddingleft: 20,
@@ -220,7 +219,7 @@ class ScoreBoardManager {
         let createSynth = new abcjs.synth.CreateSynth();
         let synthControl = this.synthControl
         let visualObj = this.visualObj
-        createSynth.init({ visualObj: this.visualObj }).then(function () {
+        createSynth.init({ visualObj: this.visualObj, soundFontUrl: "https://paulrosen.github.io/midi-js-soundfonts/MusyngKite/" }).then(function () {
             synthControl.setTune(visualObj, userAction, { chordsOff: true }).then(function () {
                 // console.log("Audio successfully loaded.")
             }).catch(function (error) {

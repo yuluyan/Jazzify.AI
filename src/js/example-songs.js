@@ -65,7 +65,7 @@ V: V1 clef=treble
 V: V2 clef=bass
 [V: V1]|:"F"g2a2"G"ee zc|"Em"_ed cz"Am"c2d2|"Dm"_e2ed "G"cd =eg|"C"ae gd ec dc|
 [V: V2]|:[F,A,,C,]2[F,A,,C,]2[G,B,,D,]2[G,B,,D,]2|[E,G,,B,,]2[E,G,,B,,]2[A,,C,E,]2[A,,C,E,]2|[D,F,A,,]2[D,F,A,,]2[G,B,,D,]2[G,B,,D,]2|[C,E,,G,,]2[C,E,,G,,]2[C,E,G,,]2[C,E,G,]2|
-[V: V1]"F"e2g2"G"ae gd|"Em"ec _e=e"Am"_ed cd|"Dm"_e2 cd"G"=eg de|"C"dc d2 c2 d2:|]
+[V: V1]"F"e2g2"G"ae gd|"Em"ec _e=e "Am"_ed cd|"Dm"_e2 cd "G"=eg de|"C"dc d2 c2 d2:|]
 [V: V2][F,A,,C,]2[F,A,,C,]2[G,B,,D,]2[G,B,,D,]2|[E,G,,B,,]2[E,G,,B,,]2[A,,C,E,]2[A,,C,E,]2|[D,F,A,,]2[D,F,A,,]2[G,B,,D,]2[G,B,,D,]2|[C,E,,G,,]2[C,E,,G,,]2[C,E,,G,,]2[C,E,,G,,]2:|]
 `,
     },

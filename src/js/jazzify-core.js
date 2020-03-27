@@ -1,6 +1,6 @@
 let Jazzify = function (scoreString) {
     console.log("Jazzify")
-    alert("Coming soon")
+    alert("Coming soon!")
     return scoreString
 }
 
