@@ -1,0 +1,62 @@
+{
+  "name": "jazzify.ai",
+  "version": "0.0.1",
+  "description": "Automatic convert songs into Jazz style",
+  "scripts": {
+    "reinstall": "rimraf node_modules && npm cache clean -force && npm install",
+    "clean": "rimraf dist",
+    "mkdirs": "mkdir -p dist/js && mkdir -p dist/css",
+    "copy:html": "cp src/index.html dist/",
+    "copy:static": "cp -r src/static/* dist/",
+    "material:dev": "cp src/material-*-dist/css/material.css dist/css/material.min.css && cp src/material-*-dist/js/material.js dist/js/material.min.js && cp src/material-*-dist/css/material.css.map dist/css/material.css.map && cp src/material-*-dist/js/material.js.map dist/js/material.js.map",
+    "material:build": "cp src/material-*-dist/css/material.min.css dist/css/ && cp src/material-*-dist/js/material.min.js dist/js/",
+    "copy": "npm run copy:html && npm run copy:static",
+    "css:dev": "node-sass src/css/jazzify.ai.scss --output-style compressed > dist/css/jazzify.ai.css",
+    "css:sass": "node-sass src/css/jazzify.ai.scss --output-style=expanded > dist/css/jazzify.ai.css",
+    "css:prefix": "npm run css:sass && postcss dist/css/jazzify.ai.css --use=autoprefixer --output=dist/css/jazzify.ai.css",
+    "css:build": "npm run css:prefix && cleancss -o dist/css/jazzify.ai.css dist/css/jazzify.ai.css",
+    "js:dev": "npx webpack --config webpack.config.js",
+    "js:build": "npx webpack --config webpack.config.js && uglifyjs --compress --mangle -o dist/js/jazzify.ai.js -- dist/js/jazzify.ai.js",
+    "prebuild": "npm run clean && npm run mkdirs && npm run copy",
+    "dev": "npm run prebuild && npm run material:dev && npm run css:dev && npm run js:dev",
+    "kill": "lsof -n -i:8080 | grep LISTEN | awk '{print $2}' | xargs kill -9",
+    "serve": "browser-sync start -s --files 'dist/**/*.(js|css|html|png|svg)' --ss 'dist' --port 8080 --reload-debounce 500",
+    "watch:static": "onchange 'src/static/*' -- npm run copy:static",
+    "watch:html": "onchange 'src/index.html' -- npm run copy:html",
+    "watch:css": "onchange 'src/css/*.scss' -- npm run css:dev",
+    "watch:js": "onchange 'src/js/*.js' -- npm run js:dev",
+    "watch": "parallelshell 'npm run watch:css' 'npm run watch:js' 'npm run watch:html' 'npm run watch:static'",
+    "start": "parallelshell 'npm run serve' 'npm run watch'",
+    "build": "npm run prebuild && npm run material:build && npm run css:build && npm run js:build",
+    "upload": "rsync -av --delete dist/* linode:/var/www/jazzify.ai/html/",
+    "deploy": "npm run build && npm run upload"
+  },
+  "author": "Luyan Yu",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yuluyan/Jazzify.AI.git"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "browserslist": [
+    ">0.25%",
+    "not ie 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^9.7.5",
+    "browser-sync": "^2.26.7",
+    "clean-css-cli": "^4.3.0",
+    "node-sass": "^4.13.1",
+    "onchange": "^6.1.0",
+    "parallelshell": "^3.0.1",
+    "postcss-cli": "^7.1.0",
+    "rimraf": "^3.0.2",
+    "uglify-js": "^3.8.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "@tensorflow/tfjs": "^1.7.0",
+    "abcjs": "^5.12.0"
+  }
+}

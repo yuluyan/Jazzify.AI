@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jazzify.AI</title>
+    <meta name="author" content="Luyan Yu">
+    <meta name="keywords" content="Jazz, Music, Machine leanring">
+    <meta name="language" content="ES">
+    <meta name="owner" content="Luyan Yu">
+    <meta name="url" content="http://www.jazzify.ai">
+    <meta name="identifier-URL" content="http://www.jazzify.ai">
+    <link rel="apple-touch-icon" sizes="192x220" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="64x74" href="/favicon-64x64.png">
+    <meta name="msapplication-TileColor" content="#ff4081">
+    <meta name="theme-color" content="#ff4081">
+    <meta name="apple-mobile-web-app-title" content="Jazzify.AI">
+    <meta name="application-name" content="Jazzify.AI">
+    <meta name="description"
+        content="Jazzify.AI uses machine learning technologies to automatically convert any song into Jazz style.">
+
+    <meta property="og:title" content="Jazzify.AI - Automatic conversion into Jazz" />
+    <meta property="og:type" content="application" />
+    <meta property="og:url" content="http://www.jazzify.ai/" />
+    <meta property="og:image" content="http://www.jazzify.ai/page-title-color-border.png">
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Jazzify.AI" />
+    <meta property="og:description" content="Automatically convert songs into Jazz style using machine learning." />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@Luyan_Yu" />
+    <meta name="twitter:creator" content="@Luyan_Yu" />
+    <meta name="twitter:title" content="Jazzify.AI - Automatic conversion into Jazz" />
+    <meta name="twitter:description"
+        content="Jazzify.AI uses machine learning technologies to automatically convert any song into Jazz style. Be creative!" />
+    <meta name="twitter:image" content="http://www.jazzify.ai/page-title-color-twitter.png" />
+
+    <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i|Roboto+Mono:300,400,700|Roboto+Slab:300,400,700"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="css/material.min.css" rel="stylesheet">
+    <link href="css/jazzify.ai.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container header">
+        <div class="row justify-content-center">
+            <img class="page-title" src="page-title.svg" alt="Jazzify.AI">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="mode-selection col-9 col-sm-7 col-md-6">
+                <ul class="nav nav-justified nav-tabs" id="input-tab" role="tablist">
+                    <li class="nav-item">
+                        <a aria-controls="examples" aria-selected="true" class="nav-link active" data-toggle="tab"
+                            href="#examples" id="example-tab" role="tab">Examples</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-controls="input-mode" aria-selected="false" class="nav-link" data-toggle="tab"
+                            href="#input-mode" id="input-mode-tab" role="tab">Input Mode</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="tab-content" id="input-tab-content">
+                <div aria-labelledby="examples-tab" class="tab-pane fade show active" id="examples" role="tabpanel">
+                    <div class="row justify-content-center">
+                        <div class="dropright" id="example-dropdown">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Select a song
+                            </button>
+                            <div class="dropdown-menu"></div>
+                        </div>
+                    </div>
+                </div>
+                <div aria-labelledby="input-mode-tab" class="tab-pane fade" id="input-mode" role="tabpanel">
+                    <div class="row justify-content-center">
+                        <div class="textfield-box score-input-group ">
+                            <label for="score-input">Write your music in abc notation (<a href="http://abcnotation.com/"
+                                    target="_blank">What is it?</a>)<br>Try clicking the notes on the score!</label>
+                            <textarea class="form-control text-monospace" id="score-input" rows="8"></textarea>
+                            <label for="score-input" class="score-input-validation error" id="score-message"></label>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="score-compile-to">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-11 col-md-10 col-lg-8">
+                <div class="score-display" id="score-display"></div>
+                <div class="score-overlay" id="score-overlay"></div>
+            </div>
+            <div id="midi-audio" style="display: none"></div>
+        </div>
+
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-secondary mr-1" id="play">
+                <div class="start"><i class="material-icons">play_arrow</i></div>
+                <div class="pause hide"><i class="material-icons">pause</i></div>
+                <div class='playing hide'>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                    <div class='bar'></div>
+                </div>
+            </button>
+            <button type="button" class="btn btn-secondary mr-1 pt-1 pb-1 pl-0 pr-0" id="jazzify">
+                <div class="jazzify-logo">
+                    <img src="button-icon.png" alt="Jazzify.AI">
+                </div>
+            </button>
+            <button type="button" class="btn btn-secondary" disabled id="download"><i
+                    class="material-icons">save_alt</i></button>
+        </div>
+    </div>
+
+    <div class="container footer">
+        <div class="row justify-content-center">
+            <p>
+                <a href="#" data-toggle="modal" data-target="#learn-more">Learn More</a> |
+                <a href="#" data-toggle="modal" data-target="#acknowledgements">Acknowledgements</a>
+            </p>
+        </div>
+        <div class="row justify-content-center">
+            <p>
+                Copyright &copy; 2020 <a href="https://www.yuluyan.com/">Luyan Yu</a>. All rights reserved.
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Learn More Modal -->
+    <div class="modal fade" id="learn-more" tabindex="-1" role="dialog" aria-labelledby="learn-more-modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="learn-more-title">About</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Acknowledge Modal -->
+    <div class="modal fade" id="acknowledgements" tabindex="-1" role="dialog" aria-labelledby="acknowledgements-modal"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="acknowledgements-title">Acknowledgements</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>This app has utilized the following open source libraries and materials:</p>
+                    <ul>
+                        <li><a href="https://www.tensorflow.org/js" target="_blank">Tensorflow.js</a> for the neural
+                            network components of the jazzify process</li>
+                        <li><a href="https://www.abcjs.net/" target="_blank">abc.js</a> for the rendering and midi
+                            playing of music
+                            scores. More information about <a href="http://abcnotation.com/" target="_blank">abc
+                                notation.</a></li>
+                        <li><a href="http://wiki.laptop.org/go/Free_sound_samples" target="_blank">OLPC Yamaha Piano
+                                Multisamples</a> for the piano sound samples</li>
+                    </ul>
+                    <p>The following materials on Jazz music theories have been very useful:</p>
+                    <ul>
+                        <li><a href="http://www.timusic.net/debreved/jazzpart1/" target="_blank">Jazz Writing</a> by Tim
+                            Davies</li>
+                        <li><a href="https://www.youtube.com/watch?v=bkOu4K95DcQ" target="_blank">How to turn any song
+                                into a Jazz song</a> by Walk That Bass</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="js/material.min.js"></script>
+
+    <!--<script src="js/tf.min.js"></script>-->
+    <script src="js/jazzify.ai.js"></script>
+
+    <script type="text/javascript">
+        var sc_project = 12224320;
+        var sc_invisible = 0;
+        var sc_security = "ac08bd5c";
+        var scJsHost = "https://";
+        document.write("<sc" + "ript type='text/javascript' src='" +
+            scJsHost +
+            "statcounter.com/counter/counter.js'></" + "script>");
+    </script>
+    <noscript>
+        <div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
+                    class="statcounter" src="https://c.statcounter.com/12224320/0/ac08bd5c/0/" alt="Web Analytics"></a>
+        </div>
+    </noscript>
+
+</body>
+
+</html>
