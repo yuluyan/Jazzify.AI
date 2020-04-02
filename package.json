@@ -8,8 +8,8 @@
     "mkdirs": "mkdir -p dist/js && mkdir -p dist/css",
     "copy:html": "cp src/index.html dist/",
     "copy:static": "cp -r src/static/* dist/",
-    "material:dev": "cp src/material-*-dist/css/material.css dist/css/material.min.css && cp src/material-*-dist/js/material.js dist/js/material.min.js && cp src/material-*-dist/css/material.css.map dist/css/material.css.map && cp src/material-*-dist/js/material.js.map dist/js/material.js.map",
-    "material:build": "cp src/material-*-dist/css/material.min.css dist/css/ && cp src/material-*-dist/js/material.min.js dist/js/",
+    "material:dev": "cp node_modules/daemonite-material/css/material.css dist/css/material.min.css && cp node_modules/daemonite-material/js/material.js dist/js/material.min.js && cp node_modules/daemonite-material/css/material.css.map dist/css/material.css.map && cp node_modules/daemonite-material/js/material.js.map dist/js/material.js.map",
+    "material:build": "cp node_modules/daemonite-material/css/material.min.css dist/css/ && cp node_modules/daemonite-material/js/material.min.js dist/js/",
     "copy": "npm run copy:html && npm run copy:static",
     "css:dev": "node-sass src/css/jazzify.ai.scss --output-style compressed > dist/css/jazzify.ai.css",
     "css:sass": "node-sass src/css/jazzify.ai.scss --output-style=expanded > dist/css/jazzify.ai.css",
@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "^1.7.0",
-    "abcjs": "^5.12.0"
+    "abcjs": "^5.12.0",
+    "daemonite-material": "^4.1.1"
   }
 }
