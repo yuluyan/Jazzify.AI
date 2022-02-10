@@ -46,7 +46,7 @@
     "autoprefixer": "^9.7.5",
     "browser-sync": "^2.26.7",
     "clean-css-cli": "^4.3.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "onchange": "^6.1.0",
     "parallelshell": "^3.0.1",
     "postcss-cli": "^7.1.0",
