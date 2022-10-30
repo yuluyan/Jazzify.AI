@@ -44,7 +44,7 @@
   ],
   "devDependencies": {
     "autoprefixer": "^9.7.5",
-    "browser-sync": "^2.26.7",
+    "browser-sync": "^2.27.10",
     "clean-css-cli": "^4.3.0",
     "node-sass": "^4.13.1",
     "onchange": "^6.1.0",
